@@ -1,4 +1,13 @@
+import {useState, useEffect} from "react";
+
+import twitterIcon from "../twitter.svg";
+
 const Quotes = () => {
+
+ 
+
+
+
   return (
     <div id="quote-box">
       <div id="text">
@@ -11,10 +20,7 @@ const Quotes = () => {
       <div id="buttons">
         <div className="social-media">
           <a href="#" id="twet-quote">
-            <img src="" alt="" />
-          </a>
-          <a href="#" id="tumlr-quote">
-            <img src="" alt="" />
+            <img src={twitterIcon} alt="" />
           </a>
         </div>
         <button id="new-quote">Nova Frase</button>
