@@ -1,2 +1,2 @@
 # Motivacional
-App em Java de frases motivacionais 
+App em Javascript de frases motivacionais utilizando uma API do github 
