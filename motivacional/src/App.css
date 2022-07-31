@@ -39,22 +39,26 @@ body {
 
 .social-media {
   display: flex;
-}
-
-.social-media > a {
   margin-right: .5rem;
   background: #0059ff;
   padding: .3rem .5rem;
   cursor: pointer;
   border-radius: 3px;
-}
-
-.social-media > a :hover {
-  opacity: .9;
+  height: 3.5em;
+  width: 9em;
 }
 
 .social-media > a img {
-  width: 1.7rem;
+  width: 2rem;
+  margin-left: 5px;
+}
+
+.social-media > a  {
+  text-align: center;
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 #new-quote {
@@ -70,5 +74,15 @@ body {
 }
 
 #new-quote :hover {
-  opacity: .9;
+  opacity: 5;
+}
+
+@media screen and (max-width: 645px){
+  #quote-box {
+    width: 80%;
+    text-align: center;
+  }
+  #text {
+    font-size:20px;
+  }
 }
