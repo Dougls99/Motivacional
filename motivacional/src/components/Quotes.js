@@ -1,59 +1,117 @@
 import { useState, useEffect } from 'react'
 
-import twitterIcon from '../twitter.svg'
+import whatsapppIcon from '../assets/whatsapp.svg'
+import twitterIcon from '../assets/twitter.svg'
 
 const Quotes = () => {
-  const [quote, setQuote] = useState('title')
-  const [author, setAuthor] = useState('')
+  const [texto, setTexto] = useState('title')
+  const [autor, setAutor] = useState('')
 
   useEffect(() => {
     getQuote()
   }, [])
 
+    const [name, setName] = useState("");
+    const [message, setMessage] = useState("");
+  
+  const handleSubmit = () => {
+    const phone = "5521968294305";
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${phone}&text=${encodedMessage}`;
+    window.open(whatsappUrl, "_blank");
+};
+
   const getQuote = () => {
-    let url = `https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json`
+    let url = `https://pensador-api.vercel.app/?term=Jesus+Cristo&max=150`
     fetch(url)
       .then(res => res.json())
       .then(data => {
-        let dataQuotes = data.quotes
+        let dataQuotes = data.frases
         let randomNum = Math.floor(Math.random() * dataQuotes.length)
         let randomQuote = dataQuotes[randomNum]
 
-        setQuote(randomQuote.quote)
-        setAuthor(randomQuote.author)
+        setTexto(randomQuote.texto)
+        setAutor(randomQuote.autor)
       })
   }
 
-  const handleClick = () => {
-    getQuote()
-  }
 
-  return (
-    <div id="quote-box">
-      <h1>Motivational</h1>
-      <div id="text">
-        <p>{quote}</p>
+  return ( 
+<>
+    <nav>
+      <div className="navbar">
+        <img src="logo-big.png" alt='Logo' width="250" height="150" href="#" />
       </div>
-      <div id="author">
-        <p>{author}</p>
+    </nav>
+
+    <div id="quote-box">
+      <h1>Motivacional do Dia</h1>
+      <div id="text">
+        <p>{texto}</p>
+      </div>
+      <div id="authosr">
+        <p>{autor}</p>
       </div>
 
       <div id="buttons">
         <div className="social-media">
           <a
-            href={`https://twitter.com/intent/tweet?text=${quote}`}
+            href={`https://twitter.com/intent/tweet?text=${autor}:   ${texto}`}
             id="twet-quote"
             target="blank"
             rel="noopener noreferrer"
-          > Compartilhar
-            <img src={twitterIcon} alt="" />
+            > Compartilhar
+            <img src={twitterIcon} />
           </a>
         </div>
-        <button onClick={handleClick} id="new-quote">
-          Nova Frase
-        </button>
+        <div className="social-media">
+        <a
+            href={`https://api.whatsapp.com/send?text=${autor}:   ${texto}`}
+            id="whats-quote"
+            target="blank"
+            rel="noopener noreferrer"
+            > Compartilhar
+            <img src={whatsapppIcon} />
+          </a>
+        </div>
       </div>
     </div>
+
+
+    <div className='div-form' >
+      <a>Orações</a>
+      <form 
+        className='form'
+        onSubmit={handleSubmit}>
+        <label>
+        Nome:
+        <input
+          className='input-name'
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        </label>
+        <label>
+        Pedido de Oração:
+        <textarea
+          className='input-text'
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="Digite sua oração..."
+        />
+        </label>
+        <button className='btn-submit' type="submit" onClick={handleSubmit}>Enviar</button>
+      </form>
+    </div>
+    
+
+    <div className='div-form' >
+      <a>Contatos</a>
+      <li><p1>Estrada do Cafundá, 2 - Jacarepaguá, Rio de Janeiro - RJ, 22730-540</p1></li>
+      <li><p1>videirario.jacarepagua@gmail.com</p1></li>
+    </div>
+</>
   )
 }
 
